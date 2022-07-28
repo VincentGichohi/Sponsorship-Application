@@ -1,7 +1,7 @@
 import uuid
-
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from users.utils.manage import UserManager
 
 ALLOWED_STATUS = [
     ("ACTIVE", "ACTIVE"),
@@ -41,6 +41,7 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     # notice the absence of the "password field", which is built in
 
+    objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []  # Email and Password are required by default
 
