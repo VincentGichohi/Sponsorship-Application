@@ -17,6 +17,9 @@ class BaseModel(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     date_deleted = models.DateTimeField(blank=True, null=True)
 
+    class Meta:
+        abstract = True
+
 
 class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
@@ -24,6 +27,9 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         max_length=255,
         unique=True
     )
+    gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
+    is_phone_verified = models.BooleanField(default=False)
+    is_email_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)  # an admin user; non-superuser
     admin = models.BooleanField(default=False)  # a superuser
