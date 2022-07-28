@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
@@ -27,6 +29,9 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         max_length=255,
         unique=True
     )
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    username = models.CharField(max_length=255, unique=True)
+    phone = models.CharField(max_length=10, blank=True, null=True)
     gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
