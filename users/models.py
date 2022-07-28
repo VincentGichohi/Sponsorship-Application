@@ -37,3 +37,13 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         "Does the user have permissions to view the app_label?"
         # SImplest answer: Yes, always
         return True
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        return self.staff
+
+    @property
+    def is_admin(self):
+        "Is the user an admin member?"
+        return self.admin
