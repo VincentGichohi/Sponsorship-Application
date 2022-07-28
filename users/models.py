@@ -63,7 +63,7 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         "Does the user have permissions to view the app_label?"
-        # SImplest answer: Yes, always
+        # Simplest answer: Yes, always
         return True
 
     @property
