@@ -28,6 +28,11 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    def has_perm(self, perm, obj=None):
+        "Does te user have a specific permission?"
+        # Simplest possible answer; yes, always
+        return True
+
     def has_module_perms(self, app_label):
         "Does the user have permissions to view the app_label?"
         # SImplest answer: Yes, always
