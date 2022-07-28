@@ -1,8 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
+ALLOWED_STATUS = [
+    ("ACTIVE", "ACTIVE"),
+    ("SUSPENDED", "SUSPENDED")
+]
 
-class MyUser(AbstractBaseUser, PermissionsMixin):
+ALLOWED_GENDER = [
+    ("MALE", "MALE"),
+    ("FEMALE", "FEMALE")
+]
+
+
+class BaseModel(models.Model):
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    date_deleted = models.DateTimeField(blank=True, null=True)
+
+
+class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
