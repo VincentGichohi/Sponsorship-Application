@@ -44,4 +44,22 @@ class UserAdminCreationForm(forms.ModelForm):
     """
     A form for creating new users. Includes all the required fields, plus a repeated password.
     """
+    password = forms.CharField(widget=forms.PasswordInput)
+    password_2 = forms.CharField(label="Confirm password", widget=forms.PasswordInput)
+
+    class Meta:
+        model = user_models.MyUser
+        fields = ['email']
+
+        def clean(self):
+            """
+            Verify both passwords match.
+            """
+            cleaned_data = super().clean()
+            password = cleaned_data.get("password")
+            password_2 = cleaned_data.get("password_2")
+            if password is not None and password != password_2:
+                self.add_error("password_2", "Your passwords do not match")
+            return cleaned_data
+
 
