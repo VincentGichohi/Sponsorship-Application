@@ -36,7 +36,7 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    staff = models.BooleanField(default=False)  # an admin user; non-superuser
+    is_staff = models.BooleanField(default=False)  # an admin user; non-superuser
     admin = models.BooleanField(default=False)  # a superuser
 
     # notice the absence of the "password field", which is built in
