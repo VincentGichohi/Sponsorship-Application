@@ -2,16 +2,13 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, is_staff, password=None):
+    def create_user(self, email, is_staff, password=None):
         """
         Creates a user with a given email and password
         """
-        if not username:
-            raise ValueError("Enter a valid username")
         if not email:
             raise ValueError("Users must have an email address")
         user = self.model(
-            username=username,
             email=email,
             is_staff=True
         )
@@ -19,16 +16,13 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_staffuser(self, username, email, password=None):
+    def create_staffuser(self, email, password=None):
         """
         Creates and saves a staff user with a given email and password
         """
-        if not username:
-            raise ValueError("Users must have a valid username")
         if not email:
             raise ValueError("Users must have a valid email address")
         user = self.model(
-            username=username,
             email=email,
             is_staff=True
         )
@@ -36,12 +30,11 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, password):
+    def create_superuser(self, email, password):
         """
         Creates and saves a superuser with a given email and password
         """
         user = self.model(
-            username=username,
             email=email,
             is_staff=True,
             password=password
