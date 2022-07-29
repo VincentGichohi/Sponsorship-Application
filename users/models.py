@@ -1,7 +1,9 @@
 import uuid
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from .utils.manage import UserManager
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser, PermissionsMixin
+)
+from .utils.manage import CustomUserManager
 
 ALLOWED_STATUS = [
     ("ACTIVE", "ACTIVE"),
@@ -23,27 +25,28 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
+class CustomUser(BaseModel, AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
-        unique=True
+        unique=True,
     )
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    username = models.CharField(max_length=255, unique=True)
-    phone = models.CharField(max_length=10, blank=True, null=True)
     gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
+    phone = models.CharField(max_length=255, blank=True, null=True)
+    username = models.CharField(max_length=255, unique=True)
+    status = models.CharField(max_length=255, choices=ALLOWED_STATUS, default="ACTIVE")
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)  # an admin user; non-superuser
-    admin = models.BooleanField(default=False)  # a superuser
+    staff = models.BooleanField(default=False) # a admin user; non super-user
+    admin = models.BooleanField(default=False) # a superuser
 
-    # notice the absence of the "password field", which is built in
+    # notice the absence of a "Password field", that is built in.
 
-    objects = UserManager()
+    objects = CustomUserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []  # Email and Password are required by default
+    REQUIRED_FIELDS = [] # Email &amp; Password are required by default.
 
     def get_full_name(self):
         # The user is identified by their email address
@@ -57,13 +60,13 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def has_perm(self, perm, obj=None):
-        "Does te user have a specific permission?"
-        # Simplest possible answer; yes, always
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app_label?"
-        # Simplest answer: Yes, always
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
         return True
 
     @property
@@ -73,5 +76,5 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_admin(self):
-        "Is the user an admin member?"
+        "Is the user a admin member?"
         return self.admin
