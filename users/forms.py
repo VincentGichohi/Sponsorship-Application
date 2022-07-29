@@ -28,7 +28,6 @@ class RegisterForm(forms.ModelForm):
                 raise forms.ValidationError("email is taken")
             return email
 
-
         def clean(self):
             """
             Verify both passwords match.
@@ -36,6 +35,13 @@ class RegisterForm(forms.ModelForm):
             cleaned_data = super().clean()
             password = cleaned_data.get("password")
             password_2 = cleaned_data.get("password_2")
-            if password is not None and password !=password_2:
+            if password is not None and password != password_2:
                 self.add_error("password_2", "Your passwords do not match.")
             return cleaned_data
+
+
+class UserAdminCreationForm(forms.ModelForm):
+    """
+    A form for creating new users. Includes all the required fields, plus a repeated password.
+    """
+
