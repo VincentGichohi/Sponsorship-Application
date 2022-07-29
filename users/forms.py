@@ -1,6 +1,6 @@
 from django import forms
 from . import models as user_models
-from .utils.manage import UserManager
+from .utils.manage import CustomUserManager
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
