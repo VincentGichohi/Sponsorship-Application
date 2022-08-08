@@ -2,7 +2,7 @@ from re import L
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from .utils.manage import BaseUserManager
+from .utils.manage import CustomUserManager
 
 ALLOWED_STATUS = [
     ("ACTIVE", "ACTIVE"),
@@ -32,12 +32,12 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
     email = models.EmailField(unique=True, blank=False, null=False)
     admin = models.BooleanField(default=False) # a superuser
-    staff = models.BooleanField(default=False) # an admin user; a non superuser 
+    is_staff = models.BooleanField(default=False) # an admin user; a non superuser 
     status = models.CharField(max_length=255, choices=ALLOWED_STATUS, default="ACTIVE")
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
 
-    objects = BaseUserManager()
+    objects = CustomUserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
