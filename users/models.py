@@ -39,6 +39,7 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     objects = BaseUserManager()
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def get_full_name(self):
         # The user is identified by their email address
@@ -65,9 +66,8 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         return self.staff
 
     @property
-    def is_staff(self):
+    def is_admin(self):
         """
         Is the user an admin member?
         """
         return self.admin
-        
