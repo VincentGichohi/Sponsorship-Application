@@ -47,7 +47,7 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         # The user is identified by their email address
         return self.email
-        
+
     def __str__(self):
         return self.email
 
@@ -56,3 +56,12 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return True
+
+    @property
+    def is_staff(self):
+        """
+        Is the user a member of staff?
+        """
+        return self.staff
+
+    
