@@ -1,3 +1,4 @@
+from re import L
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -30,7 +31,8 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
     gender = models.CharField(max_length=255, choices=ALLOWED_GENDER)
     email = models.EmailField(unique=True, blank=False, null=False)
-    is_admin = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False) # a superuser
+    staff = models.BooleanField(default=False) # an admin user; a non superuser 
     status = models.CharField(max_length=255, choices=ALLOWED_STATUS, default="ACTIVE")
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
@@ -38,6 +40,14 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     objects = BaseUserManager()
     USERNAME_FIELD = 'email'
 
+    def get_full_name(self):
+        # The user is identified by their email address
+        return self.email
+
+    def get_short_name(self):
+        # The user is identified by their email address
+        return self.email
+        
     def __str__(self):
         return self.email
 
