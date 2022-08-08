@@ -64,4 +64,10 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         """
         return self.staff
 
-    
+    @property
+    def is_staff(self):
+        """
+        Is the user an admin member?
+        """
+        return self.admin
+        
