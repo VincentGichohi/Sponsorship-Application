@@ -49,8 +49,6 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         # The user is identified by their email address
         return self.email
 
-    def __str__(self):
-        return self.email
 
     def has_perm(self, perm, obj=None):
         return True
@@ -71,3 +69,6 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
         Is the user an admin member?
         """
         return self.admin
+
+    def __str__(self):
+        return self.email
