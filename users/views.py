@@ -16,3 +16,7 @@ class SignUpView(SuccessMessageMixin, CreateView):
 
 class BaseTemplateView(TemplateView):
     template_name = 'base.html'
+
+
+class IndexTemplateView(TemplateView):
+    template_name = 'index.html'
