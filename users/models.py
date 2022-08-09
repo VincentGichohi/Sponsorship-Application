@@ -33,6 +33,7 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, blank=False, null=False)
     admin = models.BooleanField(default=False) # a superuser
     is_staff = models.BooleanField(default=False) # an admin user; a non superuser 
+    is_active = models.BooleanField(default=False)
     status = models.CharField(max_length=255, choices=ALLOWED_STATUS, default="ACTIVE")
     is_phone_verified = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
