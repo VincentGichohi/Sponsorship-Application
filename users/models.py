@@ -56,12 +56,6 @@ class MyUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         return True
 
-    @property
-    def is_staff(self):
-        """
-        Is the user a member of staff?
-        """
-        return self.staff
 
     @property
     def is_admin(self):
