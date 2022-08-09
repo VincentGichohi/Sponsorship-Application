@@ -4,6 +4,7 @@
     <list default="true" id="889d97cf-d490-478a-bf2e-be7f01de9762" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scholarship/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/scholarship/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scholarship/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/scholarship/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +32,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/css" />
+      <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/templates/registration" />
     </key>
